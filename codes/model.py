@@ -102,8 +102,7 @@ class TraceModel(nn.Module):
 
         self.out_dim = trace_hiddens[-1]
         assert len(trace_hiddens) == len(trace_kernel_sizes)
-        self.net = ConvNet(1, num_channels=trace_hiddens, kernel_sizes=trace_kernel_sizes, 
-                    dev=device, dropout=trace_dropout)
+        self.net = ConvNet(2, num_channels=trace_hiddens, kernel_sizes=trace_kernel_sizes, dev=device)
 
         self.self_attn = self_attn
         if self_attn:
@@ -125,7 +124,7 @@ class MetricModel(nn.Module):
 
         assert len(metric_hiddens) == len(metric_kernel_sizes)
         self.net = ConvNet(num_inputs=in_dim, num_channels=metric_hiddens, kernel_sizes=metric_kernel_sizes, 
-                            dev=device, dropout=metric_dropout)
+                            dev=device)
 
         self.self_attn = self_attn
         if self_attn:
@@ -208,10 +207,10 @@ class MainModel(nn.Module):
 
         self.encoder = MultiSourceEncoder(event_num, metric_num, node_num, device, debug=debug, alpha=alpha, **kwargs)
 
-        self.detecter = FullyConnected(self.encoder.feat_out_dim, 2, kwargs['detect_hiddens']).to(device)
-        self.detecter_criterion = nn.CrossEntropyLoss()
-        self.localizer = FullyConnected(self.encoder.feat_out_dim, node_num, kwargs['locate_hiddens']).to(device)
-        self.localizer_criterion = nn.CrossEntropyLoss(ignore_index=-1)
+        self.detector = FullyConnected(self.encoder.feat_out_dim, 2, kwargs['detect_hiddens']).to(device)
+        self.decoder_criterion = nn.CrossEntropyLoss()
+        self.locator = FullyConnected(self.encoder.feat_out_dim, node_num, kwargs['locate_hiddens']).to(device)
+        self.locator_criterion = nn.CrossEntropyLoss(ignore_index=-1)
         self.get_prob = nn.Softmax(dim=-1)
 
     def forward(self, graph, fault_indexs):

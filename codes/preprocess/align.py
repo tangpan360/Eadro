@@ -71,9 +71,10 @@ def get_chunks(info, idx, name, chunk_lenth=10, **kwargs):
 import numpy as np
 def get_all_chunks(name, chunk_lenth=10, **kwargs):
     aim_dir = os.path.join("../chunks", name)
-    if not os.path.exists(aim_dir): os.mkdir(aim_dir)
+    os.makedirs(aim_dir, exist_ok=True)
     ############## Concat all chunks ##############
-    bench = "trainticket" if name[0] == "A" else "socialnetwork" 
+    # bench = "trainticket" if name[0] == "A" else "socialnetwork" 
+    bench = "TrainTicket" if name == "TT" else "SocialNetwork"
     info = Info(bench)
     print('# Node num:', info.node_num)
   

@@ -8,7 +8,7 @@ class chunkDataset(Dataset): #[node_num, T, else]
         for idx, chunk_id in enumerate(chunks.keys()):
             self.idx2id[idx] = chunk_id
             chunk = chunks[chunk_id]
-            graph = dgl.graph(edges, num_nodes=node_num)
+            graph = dgl.graph((edges[0], edges[1]), num_nodes=node_num)
             graph.ndata["logs"] = torch.FloatTensor(chunk["logs"])
             graph.ndata["metrics"] = torch.FloatTensor(chunk["metrics"])
             graph.ndata["traces"] = torch.FloatTensor(chunk["traces"])
@@ -60,6 +60,7 @@ params = vars(parser.parse_args())
 
 import logging
 def get_device(gpu):
+    return torch.device("cpu")
     if gpu and torch.cuda.is_available():
         logging.info("Using GPU...")
         return torch.device("cuda")
@@ -73,10 +74,11 @@ def collate(data):
     return batched_graph , torch.tensor(labels)
 
 def run(evaluation_epoch=10):
-    data_dir = os.path.join("../chunks", params["data"])
+    data_dir = os.path.join("./chunks", params["data"])
 
     metadata = read_json(os.path.join(data_dir, "metadata.json"))
     event_num, node_num, metric_num =  metadata["event_num"], metadata["node_num"], metadata["metric_num"]
+    edges = metadata["edges"]
     params["chunk_lenth"] = metadata["chunk_lenth"]
 
     hash_id = dump_params(params)
@@ -86,8 +88,8 @@ def run(evaluation_epoch=10):
 
     train_chunks, test_chunks = load_chunks(data_dir)
 
-    train_data = chunkDataset(train_chunks, node_num)
-    test_data = chunkDataset(test_chunks, node_num)
+    train_data = chunkDataset(train_chunks, node_num, edges)
+    test_data = chunkDataset(test_chunks, node_num, edges)
     
     train_dl = DataLoader(train_data, batch_size=params["batch_size"], shuffle=True, collate_fn=collate, pin_memory=True)
     test_dl = DataLoader(test_data, batch_size=params["batch_size"], shuffle=False, collate_fn=collate, pin_memory=True)

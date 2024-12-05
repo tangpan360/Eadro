@@ -11,6 +11,22 @@ This tool try to model the intra- and inter-dependencies between microservices f
 ## Data
 Our data are at https://doi.org/10.5281/zenodo.7615393.
 
+## Preprocess the Raw Dataaset
+***Since the original repository does not provide the complete raw data preprocessing code, this fork attempts to fill in the missing puzzle pieces and fix some bugs in the original code.***
+```
+pip install drain3
+export ROOT_PATH=path/to/the/downloaded/eadro/dataset
+cd codes/preprocess/
+python parse_raw_records.py
+python parse_raw_metrics.py 
+python parse_raw_traces.py
+python parse_raw_logs.py
+python align.py --name TT
+python align.py --name SN
+```
+
+
+
 ## Dependencies
 `pip install -r requirements.txt`
 
