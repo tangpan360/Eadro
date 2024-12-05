@@ -60,7 +60,6 @@ params = vars(parser.parse_args())
 
 import logging
 def get_device(gpu):
-    return torch.device("cpu")
     if gpu and torch.cuda.is_available():
         logging.info("Using GPU...")
         return torch.device("cuda")
