@@ -12,7 +12,7 @@ def process_metrics(metrics_folder, dataset_name, info):
             metric_df = pd.read_csv(os.path.join(path, metric_file))
             metric_df = metric_df[['timestamp'] + info.metric_names]
             # add 16 hours to the timestamp column
-            metric_df['timestamp'] = metric_df['timestamp'] + 16 * 60 * 60
+            # metric_df['timestamp'] = metric_df['timestamp'] + 16 * 60 * 60
             save_path = f'./parsed_data/{dataset_name}/metrics{idx}/{metric_file}'
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
             metric_df.to_csv(save_path, index=False)

@@ -20,6 +20,7 @@ def extract_unix_timestamp(log: str) -> float:
     except ValueError:
         unix_time = pd.to_datetime(time_str, format="%Y-%m-%d %H:%M:%S.%f").timestamp()
     
+    unix_time -= 8 * 3600
     return unix_time
 
 def extract_log_template(fault_free_dataset_path, fault_time_dataset_path, dataset_name):

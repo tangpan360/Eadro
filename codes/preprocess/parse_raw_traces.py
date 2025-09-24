@@ -17,7 +17,7 @@ def parse_spans(spans_path, dataset_name, info):
                 startTime = int(span['startTime']) // 1_000_000
                 # add 8 hours to the timestamp
                 # https://github.com/BEbillionaireUSD/Eadro/issues/11#issuecomment-1887219310
-                startTime += 8 * 3600
+                startTime -= 8 * 3600
                 
                 latency = int(span['duration']) / 1_000_000
                 t_s_l.append((startTime, service, latency))

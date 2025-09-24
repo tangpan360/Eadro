@@ -37,7 +37,7 @@ def deal_logs(intervals, info, idx, name):
 
         service_events = rows.groupby("service")
         for service, sgroup in service_events:
-            events = sgroup.groupby("event")
+            events = sgroup.groupby("events")
             knots = [np.array([0.0]) for _ in range(event_num)]
             for event, egroup in events:
                 eid = 0 if event not in event2id else event2id[event]

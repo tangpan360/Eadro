@@ -26,7 +26,7 @@ class BaseModel(nn.Module):
     def evaluate(self, test_loader, datatype="Test"):
         self.model.eval()
         hrs, ndcgs = np.zeros(5), np.zeros(5)
-        TP, FP, FN = 0, 0, 0
+        TP, TN, FP, FN = 0, 0, 0, 0
         batch_cnt, epoch_loss = 0, 0.0 
         
         with torch.no_grad():
@@ -35,7 +35,7 @@ class BaseModel(nn.Module):
                 for idx, faulty_nodes in enumerate(res["y_pred"]):
                     culprit = ground_truths[idx].item()
                     if culprit == -1:
-                        if faulty_nodes[0] == -1: TP+=1
+                        if faulty_nodes[0] == -1: TN+=1
                         else: FP += 1
                     else:
                         if faulty_nodes[0] == -1: FN+=1

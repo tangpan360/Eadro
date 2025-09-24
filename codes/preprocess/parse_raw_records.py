@@ -42,8 +42,8 @@ def process_raw_records(dataset_path, data_name):
         # add 16 hours to the start and end time
         # to align with the time interal in the file-name
         # https://github.com/BEbillionaireUSD/Eadro/issues/11#issuecomment-1887219310
-        processed_records['start'] += 16 * 3600
-        processed_records['end'] += 16 * 3600
+        # processed_records['start'] += 16 * 3600
+        # processed_records['end'] += 16 * 3600
         
         processed_records['faults'] = []
         for fault in records['faults']:
@@ -52,8 +52,8 @@ def process_raw_records(dataset_path, data_name):
             start = int(fault['start'])
             end = int(fault['start'] + fault['duration'])
             
-            start += 16 * 3600
-            end += 16 * 3600
+            # start += 16 * 3600
+            # end += 16 * 3600
             
             processed_records['faults'].append({
                 'service': service,

@@ -105,10 +105,10 @@ def get_all_chunks(name, chunk_lenth=10, **kwargs):
     return chunks
 
 def split_chunks(name, test_ratio=0.2, concat=False, **kwargs):
+    chunks = {}
     if concat:
         print("*** Concating chunks...")
         chunk_num = 0
-        chunks = {}
         for dir in os.listdir("../chunks"):
             if not dir.startswith(name[0]): continue
             if os.path.exists(os.path.join("../chunks", dir, "chunks.pkl")):
@@ -122,7 +122,7 @@ def split_chunks(name, test_ratio=0.2, concat=False, **kwargs):
 
     elif os.path.exists(os.path.join("../chunks", name, "chunks.pkl")):
         with open(os.path.join("../chunks", name, "chunks.pkl"), "rb") as fr: 
-            chunks.update(pickle.load(fr))
+            chunks = pickle.load(fr)
     else: chunks = get_all_chunks(name=name, **kwargs)
 
     print("\n *** Spliting chunks into training and testing sets...")
@@ -190,29 +190,3 @@ if "__main__" == __name__:
     if params['delete'] and os.path.exists(os.path.join(aim_dir, "chunks.pkl")):
         os.remove(os.path.join(aim_dir, "chunks.pkl"))
     split_chunks(**params)
-
-    
-
-   
-
-
-
-
-
-    
-
-
-
-
-
-        
-
-
-    
-
-
-    
-
-
-
-
