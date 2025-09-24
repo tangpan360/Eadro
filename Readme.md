@@ -22,6 +22,19 @@ python parse_raw_logs.py
 python align.py --name TT
 python align.py --name SN
 ```
+
+## Train and Test the Model
+```bash
+# Return to the cods directory
+cd ../
+
+# Run on the TT dataset
+python main.py --data TT
+
+# Run on the SN dataset
+python main.py --data SN
+```
+
 ## Running Logs (with default hyper parameters)
 Because the codebase dependency version is a bit out of date, I have to run the model on CPU for now.
 ### SN-Dataset
