@@ -3,7 +3,7 @@
 Before preprocessing, verify the integrity of the downloaded dataset:
 
 ```bash
-cd data
+cd dataset
 md5sum -c checksums.md5
 ```
 
@@ -25,7 +25,7 @@ python align.py --name SN
 
 ## Train and Test the Model
 ```bash
-# Return to the cods directory
+# Return to the codes directory
 cd ../
 
 # Run on the TT dataset
