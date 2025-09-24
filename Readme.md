@@ -1,4 +1,15 @@
-## Preprocess the Raw Dataaset
+## Verify Dataset Integrity
+
+Before preprocessing, verify the integrity of the downloaded dataset:
+
+```bash
+cd data
+md5sum -c checksums.md5
+```
+
+Note: This repository ships a cleaned dataset (irrelevant or redundant files have been removed). 
+
+## Preprocess the Raw Dataset
 ***Since the original repository does not provide the complete raw data preprocessing code, this fork attempts to fill in the missing puzzle pieces and fix some bugs in the original code.***
 ```
 pip install drain3
@@ -16,23 +27,23 @@ Because the codebase dependency version is a bit out of date, I have to run the 
 ### SN-Dataset
 ``` 
 ......
-2024-12-05 09:35:47,343 P630747 INFO Epoch 48/50, training loss: 0.06338 [0.88s]
-2024-12-05 09:35:48,225 P630747 INFO Epoch 49/50, training loss: 0.04751 [0.88s]
-2024-12-05 09:35:49,704 P630747 INFO Test -- F1: 0.9819, Rec: 0.9713, Pre: 0.9927, HR@1: 0.7887, ndcg@1: 0.7887, HR@3: 0.8013, ndcg@3: 0.7966, HR@5: 0.8025, ndcg@5: 0.7971
-2024-12-05 09:35:50,605 P630747 INFO Epoch 50/50, training loss: 0.04545 [0.90s]
-2024-12-05 09:35:50,605 P630747 INFO * Best result got at epoch 29 with HR@1: 0.8179
-2024-12-05 09:35:50,605 P630747 INFO Current hash_id 78e573d7
+2025-09-24 20:33:56,451 P228100 INFO Epoch 48/50, training loss: 0.05156 [0.61s]
+2025-09-24 20:33:57,018 P228100 INFO Epoch 49/50, training loss: 0.04530 [0.57s]
+2025-09-24 20:33:58,958 P228100 INFO Test -- F1: 0.9802, Rec: 0.9920, Pre: 0.9687, HR@1: 0.9679, ndcg@1: 0.9679, HR@3: 0.9920, ndcg@3: 0.9826, HR@5: 0.9920, ndcg@5: 0.9826
+2025-09-24 20:33:59,584 P228100 INFO Epoch 50/50, training loss: 0.03268 [0.62s]
+2025-09-24 20:33:59,584 P228100 INFO * Best result got at epoch 49 with HR@1: 0.9679
+2025-09-24 20:33:59,584 P228100 INFO Current hash_id 78e573d7
 ```
 
 ### TT-Dataset
 ```
 ......
-2024-12-05 09:57:55,381 P640433 INFO Epoch 48/50, training loss: 0.07209 [25.28s]
-2024-12-05 09:58:20,640 P640433 INFO Epoch 49/50, training loss: 0.07251 [25.26s]
-2024-12-05 09:58:37,872 P640433 INFO Test -- F1: 0.9664, Rec: 0.9867, Pre: 0.9470, HR@1: 0.8822, ndcg@1: 0.8822, HR@3: 0.8838, ndcg@3: 0.8832, HR@5: 0.8839, ndcg@5: 0.8832
-2024-12-05 09:59:03,220 P640433 INFO Epoch 50/50, training loss: 0.06844 [25.35s]
-2024-12-05 09:59:03,221 P640433 INFO * Best result got at epoch 9 with HR@1: 0.9518
-2024-12-05 09:59:03,228 P640433 INFO Current hash_id 0aba95d5
+2025-09-24 22:00:03,676 P379891 INFO Epoch 48/50, training loss: 0.07763 [5.95s]
+2025-09-24 22:00:09,854 P379891 INFO Epoch 49/50, training loss: 0.06530 [6.18s]
+2025-09-24 22:00:28,727 P379891 INFO Test -- F1: 0.9644, Rec: 0.9631, Pre: 0.9656, HR@1: 0.9613, ndcg@1: 0.9613, HR@3: 0.9631, ndcg@3: 0.9624, HR@5: 0.9631, ndcg@5: 0.9624
+2025-09-24 22:00:34,795 P379891 INFO Epoch 50/50, training loss: 0.07146 [6.07s]
+2025-09-24 22:00:34,795 P379891 INFO * Best result got at epoch 9 with HR@1: 0.9876
+2025-09-24 22:00:34,796 P379891 INFO Current hash_id 0aba95d5
 ```
 
 <img width="200" alt="截屏2022-09-19 下午9 50 34" src="https://user-images.githubusercontent.com/112700133/191033061-ea4a1671-26c7-4d52-b3ed-3495a2ae0292.png">
