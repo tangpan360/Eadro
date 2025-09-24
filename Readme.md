@@ -7,6 +7,20 @@ cd dataset
 md5sum -c checksums.md5
 ```
 
+If you see the following, the dataset files are complete:
+
+```bash
+SN_Dataset.zip: OK
+TT_Dataset.zip: OK
+```
+
+To extract the dataset:
+
+```bash
+unzip TT_Dataset.zip
+unzip SN_Dataset.zip
+```
+
 Note: This repository ships a cleaned dataset (irrelevant or redundant files have been removed). 
 
 ## Preprocess the Raw Dataset
